@@ -650,8 +650,8 @@ function calculateEasterSunday(year: number): Date {
 
 ```bash
 # .husky/pre-commit
-npm run lint
-npm run type-check
+pnpm lint
+pnpm type-check
 ```
 
 ---

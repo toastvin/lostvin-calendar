@@ -461,9 +461,9 @@ git rebase develop
 
 2. **커밋 전 테스트**
    ```bash
-   npm run lint
-   npm run type-check
-   npm run test
+   pnpm lint
+   pnpm type-check
+   pnpm test
    ```
 
 3. **PR 전 develop 최신화**
