@@ -165,7 +165,7 @@
 - `constants/` 폴더 상수 정의
 
 #### 완료 기준
-- `npm run build` 성공
+- `pnpm build` 성공
 - ESLint 에러 0개
 - TypeScript 컴파일 에러 0개
 

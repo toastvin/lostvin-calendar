@@ -473,19 +473,19 @@ git log --oneline --graph
 ### 로컬 테스트
 ```bash
 # 개발 서버
-npm run dev
+pnpm dev
 
 # 빌드
-npm run build
+pnpm build
 
 # 린트
-npm run lint
+pnpm lint
 
 # 타입 체크
-npm run type-check
+pnpm type-check
 
 # 테스트
-npm run test
+pnpm test
 ```
 
 ### 문서 참조

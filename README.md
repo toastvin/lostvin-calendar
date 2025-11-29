@@ -66,6 +66,16 @@ lostvin-calendar/
 
 ## 🚀 빠른 시작 (개발 예정)
 
+### 0. pnpm 설치 (필수)
+
+```bash
+# pnpm이 없다면 먼저 설치
+npm install -g pnpm
+
+# 또는 Homebrew (macOS)
+brew install pnpm
+```
+
 ### 1. 환경 설정
 
 ```bash
@@ -74,13 +84,13 @@ git clone https://github.com/toastvin/lostvin-calendar.git
 cd lostvin-calendar
 
 # 의존성 설치
-npm install
+pnpm install
 
 # 환경 변수 설정
 cp .env.example .env.local
 
 # 개발 서버 실행
-npm run dev
+pnpm dev
 ```
 
 ### 2. 브라우저에서 열기
@@ -156,30 +166,36 @@ http://localhost:3000
 
 ```bash
 # 개발 서버
-npm run dev
+pnpm dev
 
 # 빌드
-npm run build
+pnpm build
 
 # 프로덕션 서버
-npm run start
+pnpm start
 
 # 린트
-npm run lint
+pnpm lint
 
 # 타입 체크
-npm run type-check
+pnpm type-check
 
 # 테스트
-npm run test
+pnpm test
 
 # 테스트 커버리지
-npm run test:coverage
+pnpm test:coverage
 ```
 
 ---
 
 ## 🔧 기술 스택
+
+### 패키지 매니저
+- **pnpm** - 빠르고 디스크 효율적인 패키지 매니저
+  - 중복 모듈 설치 방지 (디스크 공간 절약)
+  - npm/yarn보다 빠른 설치 속도
+  - 엄격한 의존성 관리 (phantom dependencies 방지)
 
 ### 코어
 - **Next.js 15** - React 프레임워크
