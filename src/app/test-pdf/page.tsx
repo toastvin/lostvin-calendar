@@ -1,7 +1,16 @@
 'use client';
 
-import { PDFDownloadLink } from '@react-pdf/renderer';
+import dynamic from 'next/dynamic';
 import { FontTestPDF } from '@/lib/pdf/font-test';
+
+// @react-pdf/renderer는 클라이언트에서만 작동 (SSR 비활성화)
+const PDFDownloadLink = dynamic(
+  () => import('@react-pdf/renderer').then((mod) => mod.PDFDownloadLink),
+  {
+    ssr: false,
+    loading: () => <p className="text-gray-600">PDF 도구 로딩 중...</p>,
+  }
+);
 
 export default function TestPDFPage() {
   return (
