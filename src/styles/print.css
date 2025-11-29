@@ -1,0 +1,28 @@
+@media print {
+  /* 광고 및 UI 요소 숨김 */
+  .no-print {
+    display: none !important;
+  }
+
+  /* 페이지 나누기 */
+  .page-break {
+    page-break-after: always;
+  }
+
+  /* 배경색 출력 강제 */
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* 페이지 설정 */
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  /* 기본 스타일 */
+  body {
+    background: white;
+  }
+}
