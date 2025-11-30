@@ -6,9 +6,11 @@
  * - 윤년 처리
  * - 주 시작 요일 처리 (일요일/월요일)
  * - 주차 계산 (ISO 8601)
+ * - 공휴일 통합 (Week 3)
  */
 
-import type { Month, Day, WeekStart } from '@/types/calendar';
+import type { Month, Day, WeekStart, Holiday } from '@/types/calendar';
+import { getHolidayInfo } from '@/lib/holidays/provider';
 
 /**
  * 윤년 확인
@@ -86,17 +88,20 @@ function isToday(date: Date): boolean {
 function createDay(
   date: Date,
   weekStart: WeekStart,
-  includeWeekNumber: boolean
+  includeWeekNumber: boolean,
+  holidays: Holiday[] = []
 ): Day {
   const dayOfWeek = adjustDayOfWeek(date.getDay(), weekStart);
+  const holidayInfo = getHolidayInfo(date, holidays);
 
   return {
     date,
     dayOfWeek,
     isWeekend: isWeekend(dayOfWeek, weekStart),
-    isHoliday: false, // 공휴일은 별도로 병합 (Week 3)
+    isHoliday: holidayInfo !== null,
     isToday: isToday(date),
     weekNumber: includeWeekNumber ? getWeekNumber(date) : undefined,
+    holidayInfo: holidayInfo || undefined,
   };
 }
 
@@ -107,14 +112,15 @@ export function generateMonthlyCalendar(
   year: number,
   month: number,
   weekStart: WeekStart = 'monday',
-  includeWeekNumber: boolean = false
+  includeWeekNumber: boolean = false,
+  holidays: Holiday[] = []
 ): Month {
   const days: Day[] = [];
   const daysInMonth = getDaysInMonth(year, month);
 
   for (let day = 1; day <= daysInMonth; day++) {
     const date = new Date(year, month - 1, day);
-    days.push(createDay(date, weekStart, includeWeekNumber));
+    days.push(createDay(date, weekStart, includeWeekNumber, holidays));
   }
 
   return {
@@ -129,12 +135,13 @@ export function generateMonthlyCalendar(
 export function generateYearlyCalendar(
   year: number,
   weekStart: WeekStart = 'monday',
-  includeWeekNumber: boolean = false
+  includeWeekNumber: boolean = false,
+  holidays: Holiday[] = []
 ): Month[] {
   const months: Month[] = [];
 
   for (let month = 1; month <= 12; month++) {
-    months.push(generateMonthlyCalendar(year, month, weekStart, includeWeekNumber));
+    months.push(generateMonthlyCalendar(year, month, weekStart, includeWeekNumber, holidays));
   }
 
   return months;

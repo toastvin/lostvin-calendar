@@ -5,6 +5,7 @@
  * - 단일 날짜 셀 렌더링
  * - 오늘, 주말, 공휴일 스타일 적용
  * - 주차 번호 표시 (옵션)
+ * - 공휴일 이름 툴팁 (Week 3)
  */
 
 import type { Day } from '@/types/calendar';
@@ -19,7 +20,6 @@ export function DayCell({ day, showWeekNumber = false, compact = false }: DayCel
   const dateNumber = day.date.getDate();
 
   // 스타일 계산
-  const isSpecialDay = day.isHoliday || day.isWeekend;
   const textColor = day.isHoliday
     ? 'text-red-600'
     : day.isWeekend
@@ -31,6 +31,9 @@ export function DayCell({ day, showWeekNumber = false, compact = false }: DayCel
   const cellSize = compact ? 'h-8' : 'h-12';
   const fontSize = compact ? 'text-sm' : 'text-base';
 
+  // 공휴일 이름 (툴팁용)
+  const holidayName = day.holidayInfo?.name;
+
   return (
     <div
       className={`
@@ -40,7 +43,9 @@ export function DayCell({ day, showWeekNumber = false, compact = false }: DayCel
         flex items-center justify-center
         relative
         print:border print:border-gray-200
+        group
       `}
+      title={holidayName} // 브라우저 기본 툴팁
     >
       {/* 주차 번호 (왼쪽 상단) */}
       {showWeekNumber && day.weekNumber && day.dayOfWeek === 0 && (
@@ -57,6 +62,13 @@ export function DayCell({ day, showWeekNumber = false, compact = false }: DayCel
       {/* 공휴일 표시 (작은 점) */}
       {day.isHoliday && (
         <span className="absolute bottom-0.5 w-1 h-1 bg-red-500 rounded-full" />
+      )}
+
+      {/* 공휴일 이름 (hover 툴팁) - 화면 전용 */}
+      {day.isHoliday && holidayName && !compact && (
+        <div className="absolute bottom-full mb-1 hidden group-hover:block bg-gray-900 text-white text-xs px-2 py-1 rounded whitespace-nowrap z-10 print:hidden">
+          {holidayName}
+        </div>
       )}
     </div>
   );

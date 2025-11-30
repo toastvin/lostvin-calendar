@@ -40,4 +40,13 @@ export interface Day {
   isHoliday: boolean;
   isToday: boolean;
   weekNumber?: number; // ISO 8601 주차
+  holidayInfo?: Holiday; // 공휴일 정보 (있는 경우)
+}
+
+// 공휴일 데이터 구조
+export interface Holiday {
+  date: string; // YYYY-MM-DD
+  name: string;
+  type: 'public' | 'bank' | 'school' | 'observance';
+  country: Country;
 }
