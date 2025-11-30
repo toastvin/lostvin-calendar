@@ -6,9 +6,10 @@
  * - 7일 그리드 레이아웃
  * - 요일 헤더 표시
  * - 빈 칸 처리
+ * - Week 7: Eco 모드, 프리셋, 메모 지원
  */
 
-import type { Month, WeekStart } from '@/types/calendar';
+import type { Month, WeekStart, PresetType } from '@/types/calendar';
 import { DayCell } from './DayCell';
 import { getCalendarGrid, getMonthName, getWeekdayNames } from '@/lib/calendar/generator';
 
@@ -17,6 +18,10 @@ interface MonthlyCalendarProps {
   weekStart: WeekStart;
   showWeekNumber?: boolean;
   compact?: boolean;
+  ecoMode?: boolean; // Week 7
+  preset?: PresetType; // Week 7
+  memos?: Record<string, string>; // Week 7: 날짜별 메모
+  onMemoChange?: (date: string, content: string) => void; // Week 7
 }
 
 export function MonthlyCalendar({
@@ -24,6 +29,10 @@ export function MonthlyCalendar({
   weekStart,
   showWeekNumber = false,
   compact = false,
+  ecoMode = false,
+  preset = 'default',
+  memos = {},
+  onMemoChange,
 }: MonthlyCalendarProps) {
   const { leadingBlanks, trailingBlanks } = getCalendarGrid(month, weekStart);
   const weekdayNames = getWeekdayNames(weekStart);
@@ -69,18 +78,25 @@ export function MonthlyCalendar({
           ))}
 
           {/* 날짜 셀 */}
-          {month.days.map((day) => (
-            <div
-              key={day.date.toISOString()}
-              className="border-r border-b border-gray-200 print:border-gray-300 last:border-r-0"
-            >
-              <DayCell
-                day={day}
-                showWeekNumber={showWeekNumber}
-                compact={compact}
-              />
-            </div>
-          ))}
+          {month.days.map((day) => {
+            const dateString = day.date.toISOString().split('T')[0];
+            return (
+              <div
+                key={day.date.toISOString()}
+                className="border-r border-b border-gray-200 print:border-gray-300 last:border-r-0"
+              >
+                <DayCell
+                  day={day}
+                  showWeekNumber={showWeekNumber}
+                  compact={compact}
+                  ecoMode={ecoMode}
+                  preset={preset}
+                  memo={memos[dateString]}
+                  onMemoChange={onMemoChange}
+                />
+              </div>
+            );
+          })}
 
           {/* 뒤 빈 칸 */}
           {Array.from({ length: trailingBlanks }).map((_, index) => (

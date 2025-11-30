@@ -11,6 +11,9 @@ export type Orientation = 'portrait' | 'landscape';
 export type WeekStart = 'sunday' | 'monday';
 export type Country = 'KR' | 'US' | 'JP' | 'CN';
 
+// Week 7: 프리셋 타입
+export type PresetType = 'default' | 'habit-tracker' | 'meal-planner';
+
 // Zod 스키마 (런타임 검증)
 export const CalendarConfigSchema = z.object({
   year: z.number().int().min(2020).max(2030),
@@ -22,6 +25,7 @@ export const CalendarConfigSchema = z.object({
   ecoMode: z.boolean(),
   showLunar: z.boolean(),
   showWeekNumber: z.boolean(),
+  preset: z.enum(['default', 'habit-tracker', 'meal-planner']).optional(),
 });
 
 // 타입 추론
@@ -49,4 +53,23 @@ export interface Holiday {
   name: string;
   type: 'public' | 'bank' | 'school' | 'observance';
   country: Country;
+}
+
+// Week 7: 메모 데이터 구조
+export interface Memo {
+  date: string; // YYYY-MM-DD
+  content: string;
+}
+
+export interface MemoStorage {
+  [key: string]: string; // date -> content
+}
+
+// Week 7: 프리셋 설정
+export interface PresetConfig {
+  id: PresetType;
+  name: string;
+  description: string;
+  defaultSettings: Partial<CalendarConfig>;
+  cellLayout?: 'default' | 'checkboxes' | 'large-memo';
 }

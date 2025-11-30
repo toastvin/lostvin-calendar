@@ -9,8 +9,9 @@
 
 'use client';
 
-import type { CalendarConfig, Country, PaperSize, Orientation, WeekStart } from '@/types/calendar';
+import type { CalendarConfig, Country, PaperSize, Orientation, WeekStart, PresetType } from '@/types/calendar';
 import { CURRENT_YEAR } from '@/constants/calendar';
+import { PRESET_LIST } from '@/constants/presets';
 
 interface SettingsPanelProps {
   config: CalendarConfig;
@@ -46,6 +47,23 @@ export function SettingsPanel({ config, onChange }: SettingsPanelProps) {
     onChange({ ...config, showWeekNumber: !config.showWeekNumber });
   };
 
+  // Week 7: Eco 모드 토글
+  const handleEcoModeToggle = () => {
+    onChange({ ...config, ecoMode: !config.ecoMode });
+  };
+
+  // Week 7: 프리셋 변경
+  const handlePresetChange = (presetId: PresetType) => {
+    const preset = PRESET_LIST.find((p) => p.id === presetId);
+    if (preset) {
+      onChange({
+        ...config,
+        ...preset.defaultSettings,
+        preset: presetId,
+      });
+    }
+  };
+
   const countries: { code: Country; name: string }[] = [
     { code: 'KR', name: '🇰🇷 대한민국' },
     { code: 'US', name: '🇺🇸 미국' },
@@ -56,6 +74,29 @@ export function SettingsPanel({ config, onChange }: SettingsPanelProps) {
   return (
     <div className="w-full max-w-md bg-white border border-gray-300 rounded-lg p-6 space-y-6 print:hidden">
       <h2 className="text-2xl font-bold text-gray-900">달력 설정</h2>
+
+      {/* Week 7: 프리셋 선택 */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          프리셋
+        </label>
+        <div className="grid grid-cols-3 gap-2">
+          {PRESET_LIST.map((preset) => (
+            <button
+              key={preset.id}
+              onClick={() => handlePresetChange(preset.id)}
+              className={`px-3 py-2 rounded border text-sm ${
+                config.preset === preset.id
+                  ? 'bg-blue-600 text-white border-blue-600'
+                  : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
+              }`}
+              title={preset.description}
+            >
+              {preset.name}
+            </button>
+          ))}
+        </div>
+      </div>
 
       {/* 연도 선택 */}
       <div>
@@ -216,6 +257,24 @@ export function SettingsPanel({ config, onChange }: SettingsPanelProps) {
             주차 번호 표시
           </span>
         </label>
+      </div>
+
+      {/* Week 7: Eco 모드 */}
+      <div>
+        <label className="flex items-center space-x-2 cursor-pointer">
+          <input
+            type="checkbox"
+            checked={config.ecoMode}
+            onChange={handleEcoModeToggle}
+            className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+          />
+          <span className="text-sm font-medium text-gray-700">
+            Eco 모드 (잉크 절약)
+          </span>
+        </label>
+        <p className="mt-1 text-xs text-gray-500 ml-7">
+          색상을 회색으로, 선을 얇게 변경하여 잉크를 절약합니다
+        </p>
       </div>
     </div>
   );
