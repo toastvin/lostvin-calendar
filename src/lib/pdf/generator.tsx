@@ -152,13 +152,15 @@ function MonthCalendar({ month, config }: { month: Month; config: CalendarConfig
             textStyle = styles.weekend;
           }
 
-          const cellStyle = [styles.dayCell, { width: `${100 / 7}%` }];
-          if (isToday) {
-            cellStyle.push(styles.today as any);
-          }
-
           return (
-            <View key={day.date.toISOString()} style={cellStyle}>
+            <View
+              key={day.date.toISOString()}
+              style={[
+                styles.dayCell,
+                { width: `${100 / 7}%` },
+                isToday ? styles.today : {}
+              ]}
+            >
               <Text style={textStyle}>{day.date.getDate()}</Text>
             </View>
           );

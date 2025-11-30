@@ -5,7 +5,7 @@
  * 한국, 중국, 일본 등 한자문화권 음력 지원
  */
 
-import { Lunar, Solar } from 'lunar-javascript';
+import { Solar } from 'lunar-javascript';
 
 /**
  * 음력 날짜 정보
