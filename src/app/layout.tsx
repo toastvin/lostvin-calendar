@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "@/styles/globals.css";
+import "@/styles/print.css";
 
 export const metadata: Metadata = {
   title: "Lostvin Calendar - 프린트용 달력 제작",

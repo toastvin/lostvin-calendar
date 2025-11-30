@@ -40,7 +40,7 @@ export function YearlyCalendar({
   const compact = isA4;
 
   return (
-    <div className="w-full max-w-[210mm] mx-auto p-4 print:p-0 print:max-w-none">
+    <div className="yearly-calendar w-full max-w-[210mm] mx-auto p-4 print:p-0 print:max-w-none">
       {/* 연도 제목 */}
       <h1 className="text-4xl font-bold text-center mb-6 print:mb-4 font-serif">
         {year}년 달력
@@ -54,7 +54,7 @@ export function YearlyCalendar({
         `}
       >
         {months.map((month) => (
-          <div key={month.month} className="print:break-inside-avoid">
+          <div key={month.month} className="no-page-break">
             <MonthlyCalendar
               month={month}
               weekStart={weekStart}

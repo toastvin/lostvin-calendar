@@ -28,9 +28,9 @@ function TestPDFShareContent() {
 
   return (
     <main className="container mx-auto p-8">
-      <h1 className="text-3xl font-bold mb-4">Week 4: PDF 생성 & URL 공유 테스트</h1>
+      <h1 className="text-3xl font-bold mb-4 no-print">Week 4: PDF 생성 & URL 공유 테스트</h1>
 
-      <div className="space-y-4 mb-8">
+      <div className="space-y-4 mb-8 no-print">
         {/* 테스트 목적 */}
         <div className="p-4 bg-blue-50 rounded-lg">
           <h2 className="text-xl font-semibold mb-2">테스트 목적</h2>
@@ -69,7 +69,7 @@ function TestPDFShareContent() {
       {/* 설정 & 미리보기 */}
       <div className="grid grid-cols-1 lg:grid-cols-[400px_1fr] gap-8">
         {/* 설정 패널 */}
-        <div>
+        <div className="no-print">
           <SettingsPanel config={config} onChange={setConfig} />
 
           {/* 현재 URL */}
@@ -99,7 +99,7 @@ function TestPDFShareContent() {
 
         {/* 달력 미리보기 */}
         <div>
-          <div className="mb-4 flex items-center justify-between flex-wrap gap-4">
+          <div className="mb-4 flex items-center justify-between flex-wrap gap-4 no-print">
             <h2 className="text-xl font-semibold">미리보기</h2>
 
             {/* 액션 버튼 */}
@@ -109,7 +109,7 @@ function TestPDFShareContent() {
             </div>
           </div>
 
-          <div className="border-2 border-gray-300 rounded-lg p-4 bg-white">
+          <div className="border-2 border-gray-300 rounded-lg p-4 bg-white print:border-0 print:p-0">
             <YearlyCalendar
               year={config.year}
               months={months}
@@ -123,7 +123,7 @@ function TestPDFShareContent() {
       </div>
 
       {/* 사용 가이드 */}
-      <div className="mt-8 p-4 bg-gray-50 rounded-lg print:hidden">
+      <div className="mt-8 p-4 bg-gray-50 rounded-lg no-print">
         <h2 className="text-xl font-semibold mb-2">사용 가이드</h2>
 
         <div className="space-y-4">
