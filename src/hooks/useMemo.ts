@@ -3,7 +3,7 @@
  */
 
 import { useState, useCallback } from 'react';
-import { getMemo, saveMemo, getAllMemos } from '@/lib/storage/memo';
+import { saveMemo, getAllMemos } from '@/lib/storage/memo';
 import type { MemoStorage } from '@/types/calendar';
 
 export function useMemo() {

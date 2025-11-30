@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
-import { LOCALES } from '@/constants/locales';
+import { LOCALES, isValidLocale } from '@/constants/locales';
 import '@/styles/globals.css';
 import '@/styles/print.css';
 
@@ -48,7 +48,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   const { locale } = await params;
 
   // 유효하지 않은 로케일이면 404
-  if (!LOCALES.includes(locale as any)) {
+  if (!isValidLocale(locale)) {
     notFound();
   }
 
