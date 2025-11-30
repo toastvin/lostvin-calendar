@@ -1,0 +1,68 @@
+{
+  "common": {
+    "title": "Lostvin Calendar - Free Printable Calendar",
+    "subtitle": "Create beautiful calendars in 3 clicks without login",
+    "downloadPDF": "Download PDF",
+    "print": "Print",
+    "share": "Share",
+    "copyLink": "Copy Link",
+    "linkCopied": "Link copied to clipboard!"
+  },
+  "calendar": {
+    "year": "Year",
+    "month": "Month",
+    "day": "Day",
+    "today": "Today",
+    "weekend": "Weekend",
+    "holiday": "Holiday",
+    "yearlyCalendar": "Yearly Calendar",
+    "monthlyCalendar": "Monthly Calendar"
+  },
+  "settings": {
+    "title": "Settings",
+    "year": "Year",
+    "country": "Country",
+    "paperSize": "Paper Size",
+    "orientation": "Orientation",
+    "weekStart": "Week Starts On",
+    "ecoMode": "Eco Mode (Save Ink)",
+    "showLunar": "Show Lunar Calendar",
+    "showWeekNumber": "Show Week Number",
+    "countries": {
+      "KR": "South Korea",
+      "US": "United States",
+      "JP": "Japan",
+      "CN": "China"
+    },
+    "paperSizes": {
+      "A4": "A4 (210mm × 297mm)",
+      "A3": "A3 (297mm × 420mm)"
+    },
+    "orientations": {
+      "portrait": "Portrait",
+      "landscape": "Landscape"
+    },
+    "weekStarts": {
+      "sunday": "Sunday",
+      "monday": "Monday"
+    }
+  },
+  "seo": {
+    "2025": {
+      "title": "2025 Calendar Printable - Free Download | Lostvin Calendar",
+      "description": "Print your free 2025 calendar with holidays. Available in A4/A3 size, downloadable as PDF. Create in 3 clicks without login!"
+    },
+    "2026": {
+      "title": "2026 Calendar Printable - Free Download | Lostvin Calendar",
+      "description": "Print your free 2026 calendar with holidays. Available in A4/A3 size, downloadable as PDF. Create in 3 clicks without login!"
+    },
+    "holidaysKr2026": {
+      "title": "2026 Korean Holidays Calendar - Free Printable | Lostvin Calendar",
+      "description": "Print your free 2026 Korean calendar with all public holidays including Lunar New Year, Chuseok, and Children's Day."
+    },
+    "habitTracker": {
+      "title": "Habit Tracker Calendar - Free Printable | Lostvin Calendar",
+      "description": "Print your free habit tracker calendar with checkboxes. A4 size, track your daily habits easily."
+    }
+  }
+}

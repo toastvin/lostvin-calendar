@@ -1,0 +1,68 @@
+{
+  "common": {
+    "title": "Lostvin Calendar - 무료 달력 프린트",
+    "subtitle": "로그인 없이 3클릭으로 예쁜 달력 만들기",
+    "downloadPDF": "PDF로 저장",
+    "print": "인쇄하기",
+    "share": "공유하기",
+    "copyLink": "링크 복사",
+    "linkCopied": "링크가 복사되었습니다!"
+  },
+  "calendar": {
+    "year": "년",
+    "month": "월",
+    "day": "일",
+    "today": "오늘",
+    "weekend": "주말",
+    "holiday": "공휴일",
+    "yearlyCalendar": "연간 달력",
+    "monthlyCalendar": "월간 달력"
+  },
+  "settings": {
+    "title": "설정",
+    "year": "연도",
+    "country": "국가",
+    "paperSize": "용지 크기",
+    "orientation": "방향",
+    "weekStart": "주 시작 요일",
+    "ecoMode": "Eco 모드 (잉크 절약)",
+    "showLunar": "음력 표시",
+    "showWeekNumber": "주차 표시",
+    "countries": {
+      "KR": "대한민국",
+      "US": "미국",
+      "JP": "일본",
+      "CN": "중국"
+    },
+    "paperSizes": {
+      "A4": "A4 (210mm × 297mm)",
+      "A3": "A3 (297mm × 420mm)"
+    },
+    "orientations": {
+      "portrait": "세로",
+      "landscape": "가로"
+    },
+    "weekStarts": {
+      "sunday": "일요일",
+      "monday": "월요일"
+    }
+  },
+  "seo": {
+    "2025": {
+      "title": "2025년 달력 프린트 - 무료 다운로드 | Lostvin Calendar",
+      "description": "2025년 달력을 무료로 프린트하세요. 공휴일 포함, A4/A3 크기, PDF 다운로드 가능. 로그인 없이 3클릭으로 완성!"
+    },
+    "2026": {
+      "title": "2026년 달력 프린트 - 무료 다운로드 | Lostvin Calendar",
+      "description": "2026년 달력을 무료로 프린트하세요. 공휴일 포함, A4/A3 크기, PDF 다운로드 가능. 로그인 없이 3클릭으로 완성!"
+    },
+    "holidaysKr2026": {
+      "title": "2026년 한국 공휴일 달력 - 무료 프린트 | Lostvin Calendar",
+      "description": "2026년 한국 공휴일이 표시된 달력을 무료로 프린트하세요. 설날, 추석, 어린이날 등 모든 법정 공휴일 포함."
+    },
+    "habitTracker": {
+      "title": "습관 추적 달력 - 무료 프린트 | Lostvin Calendar",
+      "description": "습관을 추적할 수 있는 달력을 무료로 프린트하세요. 체크박스 포함, A4 크기, 매일 기록 가능."
+    }
+  }
+}
