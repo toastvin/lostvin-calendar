@@ -1,28 +1,220 @@
+/**
+ * 프린트 CSS (Week 5)
+ *
+ * 목적:
+ * - UI 요소 (광고, 버튼, 네비게이션) 숨김
+ * - 페이지 나누기 제어
+ * - 배경색/공휴일 색상 출력 보장
+ * - 브라우저 호환성 (Chrome, Safari, Firefox)
+ */
+
 @media print {
-  /* 광고 및 UI 요소 숨김 */
-  .no-print {
-    display: none !important;
-  }
-
-  /* 페이지 나누기 */
-  .page-break {
-    page-break-after: always;
-  }
-
-  /* 배경색 출력 강제 */
-  * {
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
-
-  /* 페이지 설정 */
+  /* ========================================
+     기본 페이지 설정
+     ======================================== */
   @page {
     size: A4;
     margin: 0;
   }
 
-  /* 기본 스타일 */
+  /* A4 세로 페이지 설정 */
+  @page :first {
+    size: A4 portrait;
+  }
+
+  /* ========================================
+     배경색 출력 강제 (공휴일 색상 보존)
+     ======================================== */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important; /* Firefox */
+  }
+
+  /* ========================================
+     UI 요소 숨김
+     ======================================== */
+  .no-print {
+    display: none !important;
+  }
+
+  /* 네비게이션, 헤더, 푸터 숨김 */
+  nav,
+  header,
+  footer,
+  .header,
+  .footer,
+  .navigation {
+    display: none !important;
+  }
+
+  /* 버튼 및 인터랙션 요소 숨김 */
+  button:not(.print-visible),
+  .btn,
+  .button,
+  input,
+  select,
+  textarea {
+    display: none !important;
+  }
+
+  /* 광고 및 프로모션 숨김 */
+  .ad,
+  .ads,
+  .advertisement,
+  .promo,
+  .promotion,
+  [class*="adsbygoogle"] {
+    display: none !important;
+  }
+
+  /* 설정 패널 숨김 */
+  .settings,
+  .settings-panel,
+  [class*="Settings"] {
+    display: none !important;
+  }
+
+  /* 사이드바 숨김 */
+  aside,
+  .sidebar {
+    display: none !important;
+  }
+
+  /* ========================================
+     페이지 나누기 제어
+     ======================================== */
+  .page-break {
+    page-break-after: always;
+    break-after: page;
+  }
+
+  .page-break-before {
+    page-break-before: always;
+    break-before: page;
+  }
+
+  .no-page-break {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* 월별 달력: 각 월마다 페이지 나누기 (필요 시) */
+  .monthly-calendar {
+    page-break-after: always;
+    break-after: page;
+  }
+
+  /* 연간 달력: 페이지 나누기 방지 */
+  .yearly-calendar {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* ========================================
+     기본 레이아웃
+     ======================================== */
   body {
-    background: white;
+    background: white !important;
+    color: black !important;
+    margin: 0;
+    padding: 0;
+  }
+
+  html,
+  body {
+    width: 210mm; /* A4 width */
+    height: 297mm; /* A4 height */
+  }
+
+  /* 컨테이너 전체 너비 사용 */
+  .container {
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* ========================================
+     달력 전용 스타일
+     ======================================== */
+  /* 달력 그리드 최적화 */
+  .calendar,
+  [class*="calendar"] {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* 테이블 경계선 출력 */
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  table,
+  th,
+  td {
+    border: 1px solid #000 !important;
+  }
+
+  /* 공휴일 색상 강제 출력 */
+  .holiday,
+  [class*="holiday"] {
+    color: #d32f2f !important;
+    font-weight: bold !important;
+  }
+
+  /* 주말 색상 */
+  .weekend {
+    color: #1976d2 !important;
+  }
+
+  /* 오늘 날짜 배경 */
+  .today {
+    background-color: #bbdefb !important;
+  }
+
+  /* ========================================
+     텍스트 최적화
+     ======================================== */
+  /* 링크 밑줄 제거 */
+  a {
+    text-decoration: none !important;
+    color: inherit !important;
+  }
+
+  /* 링크 URL 표시 안 함 */
+  a[href]:after {
+    content: none !important;
+  }
+
+  /* 불필요한 그림자/효과 제거 */
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  /* ========================================
+     브라우저별 최적화
+     ======================================== */
+  /* Chrome: 배경 그래픽 출력 */
+  @media print and (-webkit-min-device-pixel-ratio: 0) {
+    * {
+      -webkit-print-color-adjust: exact !important;
+    }
+  }
+
+  /* Firefox: 페이지 크기 고정 */
+  @supports (-moz-appearance: none) {
+    @page {
+      size: 210mm 297mm;
+    }
+  }
+
+  /* Safari: 여백 제거 */
+  @supports (-webkit-appearance: none) and (not (overflow: -webkit-marquee)) and (not (-ms-ime-align: auto)) {
+    body {
+      margin: 0 !important;
+    }
   }
 }
