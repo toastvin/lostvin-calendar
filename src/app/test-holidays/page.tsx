@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { getHolidays, type Country, type Holiday } from '@/lib/holidays/provider';
+import type { Country, Holiday } from '@/types/calendar';
+import { getHolidays } from '@/lib/holidays/provider';
 
 export default function TestHolidaysPage() {
   const [year, setYear] = useState(2025);

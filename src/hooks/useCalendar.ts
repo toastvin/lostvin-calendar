@@ -3,6 +3,7 @@
  *
  * 책임:
  * - 달력 데이터 생성
+ * - 공휴일 데이터 통합 (Week 3)
  * - 설정 관리
  * - 데이터 메모이제이션
  */
@@ -12,6 +13,7 @@
 import { useMemo } from 'react';
 import type { CalendarConfig, Month } from '@/types/calendar';
 import { generateYearlyCalendar, generateMonthlyCalendar } from '@/lib/calendar/generator';
+import { getHolidays } from '@/lib/holidays/provider';
 
 interface UseCalendarResult {
   months: Month[];
@@ -19,13 +21,19 @@ interface UseCalendarResult {
 }
 
 export function useCalendar(config: CalendarConfig): UseCalendarResult {
+  // 공휴일 데이터 가져오기 (메모이제이션)
+  const holidays = useMemo(() => {
+    return getHolidays(config.year, config.countries);
+  }, [config.year, config.countries]);
+
   // 달력 데이터 생성 (메모이제이션)
   const months = useMemo(() => {
     if (config.type === 'yearly') {
       return generateYearlyCalendar(
         config.year,
         config.weekStart,
-        config.showWeekNumber
+        config.showWeekNumber,
+        holidays
       );
     }
 
@@ -37,14 +45,15 @@ export function useCalendar(config: CalendarConfig): UseCalendarResult {
           config.year,
           currentMonth,
           config.weekStart,
-          config.showWeekNumber
+          config.showWeekNumber,
+          holidays
         ),
       ];
     }
 
     // quarterly는 Week 6에서 구현 예정
     return [];
-  }, [config.year, config.type, config.weekStart, config.showWeekNumber]);
+  }, [config.year, config.type, config.weekStart, config.showWeekNumber, holidays]);
 
   return {
     months,

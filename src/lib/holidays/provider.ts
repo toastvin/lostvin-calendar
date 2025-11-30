@@ -8,15 +8,7 @@
  */
 
 import Holidays from 'date-holidays';
-
-export type Country = 'KR' | 'US' | 'JP' | 'CN';
-
-export interface Holiday {
-  date: string; // YYYY-MM-DD
-  name: string;
-  type: string; // 'public', 'bank', 'school', 'observance'
-  country: Country;
-}
+import type { Country, Holiday } from '@/types/calendar';
 
 /**
  * 특정 연도의 공휴일 데이터를 가져옵니다
@@ -29,10 +21,11 @@ export function getHolidays(year: number, countries: Country[]): Holiday[] {
     const holidays = hd.getHolidays(year);
 
     holidays.forEach((holiday) => {
+      const type = holiday.type as Holiday['type'];
       allHolidays.push({
         date: holiday.date.split(' ')[0], // '2025-01-01 00:00:00' → '2025-01-01'
         name: holiday.name,
-        type: holiday.type,
+        type: type === 'public' || type === 'bank' || type === 'school' || type === 'observance' ? type : 'observance',
         country,
       });
     });
