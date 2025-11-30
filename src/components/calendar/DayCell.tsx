@@ -14,6 +14,7 @@
 import { useState } from 'react';
 import type { Day, PresetType } from '@/types/calendar';
 import { ECO_MODE_STYLES } from '@/constants/calendar';
+import { getLunarSimple } from '@/lib/lunar/converter';
 
 interface DayCellProps {
   day: Day;
@@ -23,6 +24,7 @@ interface DayCellProps {
   preset?: PresetType; // Week 7: 프리셋 타입
   memo?: string; // Week 7: 메모 내용
   onMemoChange?: (date: string, content: string) => void; // Week 7: 메모 변경 핸들러
+  showLunar?: boolean; // Week 7: 음력 표시
 }
 
 export function DayCell({
@@ -33,12 +35,16 @@ export function DayCell({
   preset = 'default',
   memo = '',
   onMemoChange,
+  showLunar = false,
 }: DayCellProps) {
   const [isEditingMemo, setIsEditingMemo] = useState(false);
   const [memoText, setMemoText] = useState(memo);
 
   const dateNumber = day.date.getDate();
   const dateString = day.date.toISOString().split('T')[0];
+
+  // Week 7: 음력 변환
+  const lunarDate = showLunar ? getLunarSimple(day.date) : '';
 
   // Week 7: Eco 모드 스타일
   const ecoStyles = ecoMode
@@ -101,9 +107,18 @@ export function DayCell({
       )}
 
       {/* 날짜 번호 */}
-      <span className={`${fontSize} ${preset === 'default' ? 'font-medium' : 'text-sm font-bold'}`}>
-        {dateNumber}
-      </span>
+      <div className="flex flex-col items-center">
+        <span className={`${fontSize} ${preset === 'default' ? 'font-medium' : 'text-sm font-bold'}`}>
+          {dateNumber}
+        </span>
+
+        {/* Week 7: 음력 표시 */}
+        {showLunar && lunarDate && (
+          <span className="text-[10px] text-gray-500 print:text-[8px]">
+            {lunarDate}
+          </span>
+        )}
+      </div>
 
       {/* Week 7: 습관 추적 프리셋 - 체크박스 3개 */}
       {preset === 'habit-tracker' && (

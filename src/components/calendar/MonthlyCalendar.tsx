@@ -22,6 +22,7 @@ interface MonthlyCalendarProps {
   preset?: PresetType; // Week 7
   memos?: Record<string, string>; // Week 7: 날짜별 메모
   onMemoChange?: (date: string, content: string) => void; // Week 7
+  showLunar?: boolean; // Week 7: 음력 표시
 }
 
 export function MonthlyCalendar({
@@ -33,6 +34,7 @@ export function MonthlyCalendar({
   preset = 'default',
   memos = {},
   onMemoChange,
+  showLunar = false,
 }: MonthlyCalendarProps) {
   const { leadingBlanks, trailingBlanks } = getCalendarGrid(month, weekStart);
   const weekdayNames = getWeekdayNames(weekStart);
@@ -93,6 +95,7 @@ export function MonthlyCalendar({
                   preset={preset}
                   memo={memos[dateString]}
                   onMemoChange={onMemoChange}
+                  showLunar={showLunar}
                 />
               </div>
             );

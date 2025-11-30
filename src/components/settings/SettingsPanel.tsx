@@ -52,6 +52,11 @@ export function SettingsPanel({ config, onChange }: SettingsPanelProps) {
     onChange({ ...config, ecoMode: !config.ecoMode });
   };
 
+  // Week 7: 음력 표시 토글
+  const handleLunarToggle = () => {
+    onChange({ ...config, showLunar: !config.showLunar });
+  };
+
   // Week 7: 프리셋 변경
   const handlePresetChange = (presetId: PresetType) => {
     const preset = PRESET_LIST.find((p) => p.id === presetId);
@@ -274,6 +279,24 @@ export function SettingsPanel({ config, onChange }: SettingsPanelProps) {
         </label>
         <p className="mt-1 text-xs text-gray-500 ml-7">
           색상을 회색으로, 선을 얇게 변경하여 잉크를 절약합니다
+        </p>
+      </div>
+
+      {/* Week 7: 음력 표시 */}
+      <div>
+        <label className="flex items-center space-x-2 cursor-pointer">
+          <input
+            type="checkbox"
+            checked={config.showLunar}
+            onChange={handleLunarToggle}
+            className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+          />
+          <span className="text-sm font-medium text-gray-700">
+            음력 표시
+          </span>
+        </label>
+        <p className="mt-1 text-xs text-gray-500 ml-7">
+          양력 날짜 아래에 음력 날짜를 표시합니다 (예: 1.1, 8.15)
         </p>
       </div>
     </div>
